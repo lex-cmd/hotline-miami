@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     private float speed = 1f;
     private bool isPatroling = true;
     private bool isMoving = true;
-    private bool isClockWise = true;
+    public bool isAttack = true;
     private int layerMask = 8;
     private int countPoint = 0;
     private int maxPoint = 0;
@@ -61,9 +61,13 @@ public class Enemy : MonoBehaviour
             {
                 isPatroling = false;
                 directionToDestination = player.transform.position - transform.position;
+                isAttack = true;
             }
             else
+            {
+                isAttack = false;
                 isPatroling = true;
+            }
         }
     }
 
