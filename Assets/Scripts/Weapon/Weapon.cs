@@ -8,16 +8,19 @@ public abstract class Weapon : MonoBehaviour
     public float fireRate;
     public float damage;
     public string WeaponName;
+    public bool inSlot;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        inSlot = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        spriteRenderer.enabled = inSlot;
     }
 
     public abstract void Action(Vector3 direction);

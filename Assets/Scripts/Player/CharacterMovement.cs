@@ -7,7 +7,6 @@ public class CharacterMovement : MonoBehaviour
    //Переменные перемещения персонажа 
     Rigidbody2D rigidBody;
     public float speed;
-
     float x, y;
     public bool canMove = true;
     

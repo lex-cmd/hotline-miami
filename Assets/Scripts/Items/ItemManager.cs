@@ -5,12 +5,16 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     private PlayerWeaponManager playerWeapon;
+    private SpriteRenderer spriteRenderer;
+
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.enabled = true;
     }
     void Update()
     {
-                
+
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -18,7 +22,7 @@ public class ItemManager : MonoBehaviour
         if (collision.name == "Player")
         {
             playerWeapon = collision.GetComponent<PlayerWeaponManager>();
-            collision.GetComponent<PlayerWeaponManager>().inTrigger = true;
+            playerWeapon.inTrigger = true;
 
             if (Input.GetKeyDown(KeyCode.Mouse1))
             {
@@ -31,7 +35,7 @@ public class ItemManager : MonoBehaviour
     {
         if (collision.name == "Player")
         {
-            collision.GetComponent<PlayerWeaponManager>().inTrigger = false;
+            playerWeapon.inTrigger = false;
         }
     }
 
@@ -41,8 +45,7 @@ public class ItemManager : MonoBehaviour
         {
             playerWeapon.dropWeapon();
         }
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.005f);
         playerWeapon.Weapon = gameObject;
-        Destroy(gameObject);
     }
 }

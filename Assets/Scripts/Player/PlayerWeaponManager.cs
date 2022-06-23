@@ -8,9 +8,11 @@ public class PlayerWeaponManager : MonoBehaviour
     public GameObject Weapon;
     public Weapon currentWeapon;
     public bool inTrigger = false;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
+        Weapon = null;
     }
     
     void Update()
@@ -30,6 +32,9 @@ public class PlayerWeaponManager : MonoBehaviour
         {
             currentWeapon = Weapon.GetComponent<Weapon>();
             Weapon.transform.position = gameObject.transform.position;
+            spriteRenderer = Weapon.GetComponent<SpriteRenderer>();
+            spriteRenderer.enabled = false;
+
 
             if (Input.GetKeyDown(KeyCode.Mouse1) && !inTrigger)
             {
@@ -46,9 +51,16 @@ public class PlayerWeaponManager : MonoBehaviour
     {
         if (Weapon != null)
         {
-            Instantiate(Weapon.gameObject, transform.position, Quaternion.identity);
+            Instantiate(Weapon, transform.position, Quaternion.identity);
+            spriteRenderer.enabled = true;
+
+            Destroy(Weapon);
+
             if (!inTrigger)
+            {
                 Weapon = null;
+                currentWeapon = null;
+            }
         }
         else
         {
